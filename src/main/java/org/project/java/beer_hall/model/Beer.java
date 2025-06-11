@@ -1,5 +1,7 @@
 package org.project.java.beer_hall.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,10 +31,10 @@ public class Beer {
     private String imgUrl;
 
     @OneToMany(mappedBy = "beer")
-    private Brewery brewery;
+    private List<Brewery> breweries;
 
     @OneToMany(mappedBy = "beer")
-    private Style style;
+    private List<Style> styles;
 
     // # Getters / Setters
 
@@ -76,20 +78,20 @@ public class Beer {
         this.imgUrl = imgUrl;
     }
 
-    public Brewery getBrewery() {
-        return brewery;
+    public List<Brewery> getBreweries() {
+        return breweries;
     }
 
-    public void setBrewery(Brewery brewery) {
-        this.brewery = brewery;
+    public void setBreweries(List<Brewery> breweries) {
+        this.breweries = breweries;
     }
 
-    public Style getStyle() {
-        return style;
+    public List<Style> getStyles() {
+        return styles;
     }
 
-    public void setStyle(Style style) {
-        this.style = style;
+    public void setStyles(List<Style> styles) {
+        this.styles = styles;
     }
 
     // # Constructors
@@ -98,13 +100,13 @@ public class Beer {
     }
 
     public Beer(@NotBlank String name, @NotBlank String size, @NotBlank String alcoholDegrees, @NotBlank String imgUrl,
-            Brewery brewery, Style style) {
+            List<Brewery> breweries, List<Style> styles) {
         this.name = name;
         this.size = size;
         this.alcoholDegrees = alcoholDegrees;
         this.imgUrl = imgUrl;
-        this.brewery = brewery;
-        this.style = style;
+        this.breweries = breweries;
+        this.styles = styles;
     }
 
     // # Methods
