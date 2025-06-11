@@ -1,16 +1,15 @@
 package org.project.java.beer_hall.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "beers")
@@ -26,18 +25,21 @@ public class Beer {
     @NotBlank
     private String size;
 
-    @NotNull
-    @PositiveOrZero
-    private double alcoholDegrees;
+    @NotBlank
+    private String alcoholDegrees;
 
     @NotBlank
     private String imgUrl;
 
-    @OneToMany(mappedBy = "beer")
-    private List<Brewery> breweries;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "brewery_id", nullable = false)
+    private Brewery brewery;
 
-    @OneToMany(mappedBy = "beer")
-    private List<Style> styles;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "style_id", nullable = false)
+    private Style style;
 
     // # Getters / Setters
 
@@ -65,11 +67,11 @@ public class Beer {
         this.size = size;
     }
 
-    public double getAlcoholDegrees() {
+    public String getAlcoholDegrees() {
         return alcoholDegrees;
     }
 
-    public void setAlcoholDegrees(double alcoholDegrees) {
+    public void setAlcoholDegrees(String alcoholDegrees) {
         this.alcoholDegrees = alcoholDegrees;
     }
 
@@ -81,20 +83,20 @@ public class Beer {
         this.imgUrl = imgUrl;
     }
 
-    public List<Brewery> getBreweries() {
-        return breweries;
+    public Brewery getBrewery() {
+        return brewery;
     }
 
-    public void setBreweries(List<Brewery> breweries) {
-        this.breweries = breweries;
+    public void setBrewery(Brewery brewery) {
+        this.brewery = brewery;
     }
 
-    public List<Style> getStyles() {
-        return styles;
+    public Style getStyle() {
+        return style;
     }
 
-    public void setStyles(List<Style> styles) {
-        this.styles = styles;
+    public void setStyle(Style style) {
+        this.style = style;
     }
 
     // # Constructors
@@ -102,15 +104,14 @@ public class Beer {
     public Beer() {
     }
 
-    public Beer(@NotBlank String name, @NotBlank String size, @NotNull @PositiveOrZero double alcoholDegrees,
-            @NotBlank String imgUrl,
-            List<Brewery> breweries, List<Style> styles) {
+    public Beer(@NotBlank String name, @NotBlank String size, @NotBlank String alcoholDegrees, @NotBlank String imgUrl,
+            Brewery brewery, Style style) {
         this.name = name;
         this.size = size;
         this.alcoholDegrees = alcoholDegrees;
         this.imgUrl = imgUrl;
-        this.breweries = breweries;
-        this.styles = styles;
+        this.brewery = brewery;
+        this.style = style;
     }
 
     // # Methods
