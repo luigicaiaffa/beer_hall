@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "beers")
@@ -24,8 +26,9 @@ public class Beer {
     @NotBlank
     private String size;
 
-    @NotBlank
-    private String alcoholDegrees;
+    @NotNull
+    @PositiveOrZero
+    private double alcoholDegrees;
 
     @NotBlank
     private String imgUrl;
@@ -62,11 +65,11 @@ public class Beer {
         this.size = size;
     }
 
-    public String getAlcoholDegrees() {
+    public double getAlcoholDegrees() {
         return alcoholDegrees;
     }
 
-    public void setAlcoholDegrees(String alcoholDegrees) {
+    public void setAlcoholDegrees(double alcoholDegrees) {
         this.alcoholDegrees = alcoholDegrees;
     }
 
@@ -99,7 +102,8 @@ public class Beer {
     public Beer() {
     }
 
-    public Beer(@NotBlank String name, @NotBlank String size, @NotBlank String alcoholDegrees, @NotBlank String imgUrl,
+    public Beer(@NotBlank String name, @NotBlank String size, @NotNull @PositiveOrZero double alcoholDegrees,
+            @NotBlank String imgUrl,
             List<Brewery> breweries, List<Style> styles) {
         this.name = name;
         this.size = size;
