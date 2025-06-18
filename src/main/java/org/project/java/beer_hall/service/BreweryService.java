@@ -59,4 +59,11 @@ public class BreweryService {
         delete(brewery);
     }
 
+    public Boolean existsById(Integer id) {
+        return breweryRepository.existsById(id);
+    }
+
+    public Boolean exists(Brewery brewery) {
+        return breweryRepository.existsById(brewery.getId());
+    }
 }
