@@ -1,7 +1,7 @@
 package org.project.java.beer_hall.controller;
 
-import org.project.java.beer_hall.model.Beer;
-import org.project.java.beer_hall.service.BeerService;
+import org.project.java.beer_hall.model.Brewery;
+import org.project.java.beer_hall.service.BreweryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,71 +15,71 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/beers")
-public class BeerController {
+@RequestMapping("/breweries")
+public class BreweryController {
 
     @Autowired
-    private BeerService beerService;
+    private BreweryService breweryService;
 
     @GetMapping
     public String index(Model model) {
 
-        model.addAttribute("beers", beerService.findAll());
-        return "beer/index";
+        model.addAttribute("breweries", breweryService.findAll());
+        return "brewery/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("beer", beerService.findById(id));
-        return "beer/show";
+        model.addAttribute("brewery", breweryService.findById(id));
+        return "brewery/show";
     }
 
     @GetMapping("/create")
     public String create(Model model) {
 
-        model.addAttribute("beer", new Beer());
-        return "beer/form";
+        model.addAttribute("brewery", new Brewery());
+        return "brewery/form";
     }
 
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult, Model model) {
+    public String store(@Valid @ModelAttribute("brewery") Brewery formBrewery, BindingResult bindingResult,
+            Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "beer/form";
+            return "brewery/form";
         }
 
-        beerService.create(formBeer);
-        return "redirect:/beers";
+        breweryService.create(formBrewery);
+        return "redirect:/breweries";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("edit", true);
-        model.addAttribute("beer", beerService.findById(id));
-        return "beer/form";
+        model.addAttribute("brewery", breweryService.findById(id));
+        return "brewery/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable Integer id, @Valid @ModelAttribute("beer") Beer formBeer,
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("brewery") Brewery formBrewery,
             BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
-            model.addAttribute("beer", formBeer);
-            return "beer/form";
+            model.addAttribute("brewery", formBrewery);
+            return "brewery/form";
         }
 
-        beerService.update(formBeer);
-        return "redirect:/beers/" + id;
+        breweryService.update(formBrewery);
+        return "redirect:/breweries/" + id;
     }
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Integer id) {
 
-        beerService.deleteById(id);
-        return "redirect:/beers";
+        breweryService.deleteById(id);
+        return "redirect:/breweries";
     }
-
 }
