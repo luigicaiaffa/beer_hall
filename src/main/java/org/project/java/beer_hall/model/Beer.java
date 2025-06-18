@@ -33,12 +33,12 @@ public class Beer {
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "brewery_id", nullable = false)
+    @JoinColumn(name = "brewery_id", nullable = true)
     private Brewery brewery;
 
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "style_id", nullable = false)
+    @JoinColumn(name = "style_id", nullable = true)
     private Style style;
 
     // # Getters / Setters

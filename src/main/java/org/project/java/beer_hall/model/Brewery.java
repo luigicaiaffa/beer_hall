@@ -53,11 +53,11 @@ public class Brewery {
         this.nation = nation;
     }
 
-    public List<Beer> getBeer() {
+    public List<Beer> getBeers() {
         return beers;
     }
 
-    public void setBeer(List<Beer> beers) {
+    public void setBeers(List<Beer> beers) {
         this.beers = beers;
     }
 
