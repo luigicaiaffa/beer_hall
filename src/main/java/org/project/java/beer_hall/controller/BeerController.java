@@ -17,50 +17,69 @@ import jakarta.validation.Valid;
 @Controller
 @RequestMapping("/beers")
 public class BeerController {
-    
+
     @Autowired
     private BeerService beerService;
 
     @GetMapping
     public String index(Model model) {
-        return "beers/index";
+
+        model.addAttribute("beers", beerService.findAll());
+        return "beer/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
-        return "beers/show";
+
+        model.addAttribute("beer", beerService.findById(id));
+        return "beer/show";
     }
 
-    @GetMapping("/create") 
+    @GetMapping("/create")
     public String create(Model model) {
 
         model.addAttribute("beer", new Beer());
-        return "beers/form";
+        return "beer/form";
     }
 
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult, Model model) {
 
+        if (bindingResult.hasErrors()) {
+            return "beer/form";
+        }
+
+        beerService.create(formBeer);
         return "redirect:/beers";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) {
 
-        return "beers/form";
+        model.addAttribute("edit", true);
+        model.addAttribute("beer", beerService.findById(id));
+        return "beer/form";
     }
 
     @PostMapping("/{id}/edit")
-    public String update(@PathVariable Integer id, @Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult, Model model) {
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute("beer") Beer formBeer,
+            BindingResult bindingResult, Model model) {
 
-        return "redirect:/beers";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("edit", true);
+            model.addAttribute("beer", formBeer);
+            return "beer/form";
+        }
+
+        beerService.update(formBeer);
+        return "redirect:/beers/" + id;
     }
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Integer id, Model model) {
-        
+
         beerService.deleteById(id);
         return "redirect:/beers";
     }
-    
+
 }

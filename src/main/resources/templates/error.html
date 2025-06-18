@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Error</title>
+
+    <div th:replace="~{main/fragments :: styles}"></div>
+  </head>
+  <body>
+    <div class="container">
+      <main>
+        <div class="card courseCards h-100 w-50 mx-auto">
+          <div class="p-5 card-body text-center">
+            <h1 class="fw-bold" th:text="${status}"></h1>
+            <h2 class="fw-semibold" th:text="${error}"></h2>
+            <p class="text-secondary mt-3" th:text="${message}"></p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div th:replace="~{main/fragments :: scripts}"></div>
+  </body>
+</html>
