@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Beers Index</title>
+    <th:block th:replace="~{main/fragments :: styles}"></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{main/fragments :: header}"></th:block>
+
+    <div class="container">
+      <main>
+        <div
+          class="d-flex justify-content-between align-items-center mb-4 mt-5"
+        ></div>
+
+        <section th:if="${beer}" class="mb-5"></section>
+
+        <div th:unless="${beer}">
+          <p>Birra non trovata</p>
+        </div>
+      </main>
+    </div>
+
+    <th:block th:replace="~{main/fragments :: scripts}"></th:block>
+  </body>
+</html>
