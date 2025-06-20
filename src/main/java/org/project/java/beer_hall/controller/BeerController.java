@@ -2,6 +2,8 @@ package org.project.java.beer_hall.controller;
 
 import org.project.java.beer_hall.model.Beer;
 import org.project.java.beer_hall.service.BeerService;
+import org.project.java.beer_hall.service.BreweryService;
+import org.project.java.beer_hall.service.StyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,12 @@ public class BeerController {
     @Autowired
     private BeerService beerService;
 
+    @Autowired
+    private BreweryService breweryService;
+
+    @Autowired
+    private StyleService styleService;
+
     @GetMapping
     public String index(Model model) {
 
@@ -38,6 +46,8 @@ public class BeerController {
     @GetMapping("/create")
     public String create(Model model) {
 
+        model.addAttribute("breweries", breweryService.findAll());
+        model.addAttribute("styles", styleService.findAll());
         model.addAttribute("beer", new Beer());
         return "beer/form";
     }
@@ -46,6 +56,8 @@ public class BeerController {
     public String store(@Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("breweries", breweryService.findAll());
+            model.addAttribute("styles", styleService.findAll());
             return "beer/form";
         }
 
@@ -57,6 +69,8 @@ public class BeerController {
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("edit", true);
+        model.addAttribute("breweries", breweryService.findAll());
+        model.addAttribute("styles", styleService.findAll());
         model.addAttribute("beer", beerService.getById(id));
         return "beer/form";
     }
@@ -67,6 +81,8 @@ public class BeerController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
+            model.addAttribute("breweries", breweryService.findAll());
+            model.addAttribute("styles", styleService.findAll());
             model.addAttribute("beer", formBeer);
             return "beer/form";
         }

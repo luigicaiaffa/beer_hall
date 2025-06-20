@@ -27,7 +27,6 @@
               class="row g-4 mt-2"
             >
               <input type="hidden" th:field="*{id}" />
-              
 
               <div class="col-md-4">
                 <label for="name" class="form-label">Nome</label>
@@ -119,15 +118,19 @@
                 </div>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="brewery" class="form-label">Birrificio</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="brewery"
-                  th:field="*{brewery}"
-                  th:errorClass="is-invalid"
-                />
+                <select
+                  th:if="${breweries}"
+                  class="form-select"
+                  th:value="${brewery}"
+                  name="brewery"
+                >
+                  <option selected></option>
+                  <option th:each="brew : ${breweries}" th:value="${brew.id}">
+                    [[${brew.name}]]
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   th:if="${#fields.hasErrors('brewery')}"
@@ -139,17 +142,29 @@
                     ></li>
                   </ul>
                 </div>
+
+                <div th:unless="${breweries}" class="col-md-6">
+                  <a
+                    th:href="@{/breweries/create}"
+                    class="btn btn-sm btn-warning"
+                    >Registra Birrificio</a
+                  >
+                </div>
               </div>
 
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <label for="style" class="form-label">Stile</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="style"
-                  th:field="*{style}"
-                  th:errorClass="is-invalid"
-                />
+                <select
+                  th:if="${styles}"
+                  class="form-select"
+                  th:value="${style}"
+                  name="style"
+                >
+                  <option selected></option>
+                  <option th:each="sty : ${styles}" th:value="${sty.id}">
+                    [[${sty.name}]]
+                  </option>
+                </select>
                 <div
                   class="invalid-feedback"
                   th:if="${#fields.hasErrors('style')}"
@@ -160,6 +175,12 @@
                       th:text="${error}"
                     ></li>
                   </ul>
+                </div>
+
+                <div th:unless="${styles}" class="col-md-6">
+                  <a th:href="@{/styles/create}" class="btn btn-sm btn-warning"
+                    >Registra Stile</a
+                  >
                 </div>
               </div>
 
