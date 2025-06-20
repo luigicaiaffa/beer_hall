@@ -57,7 +57,7 @@ public class BeerController {
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("edit", true);
-        model.addAttribute("beer", beerService.findById(id));
+        model.addAttribute("beer", beerService.getById(id));
         return "beer/form";
     }
 

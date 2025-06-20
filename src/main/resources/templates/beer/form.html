@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Beer Form</title>
+
+    <div th:replace="~{main/fragments :: styles}"></div>
+  </head>
+  <body>
+    <div th:replace="~{main/fragments :: header}"></div>
+
+    <div class="container">
+      <main>
+        <div class="card h-100 mt-5">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="border-bottom border-2 w-100">
+                <h1 th:if="${edit}">Modifica [[${beer.name}]]</h1>
+                <h1 th:unless="${edit}">Registra Birra</h1>
+              </div>
+            </div>
+
+            <form
+              id="user-form"
+              method="POST"
+              th:action="${edit} ? @{/beers/{id}/edit (id = ${beer.id})} : @{/beers/create}"
+              th:object="${beer}"
+              class="row g-4 mt-2"
+            >
+              <input type="hidden" th:field="*{id}" />
+              
+
+              <div class="col-md-4">
+                <label for="name" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  th:field="*{name}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('name')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('name')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="size" class="form-label">Dimensione (cl)</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="size"
+                  th:field="*{size}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('size')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('size')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <label for="alcoholDegrees" class="form-label"
+                  >Gradazione alcolica</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="alcoholDegrees"
+                  th:field="*{alcoholDegrees}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('alcoholDegrees')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('alcoholDegrees')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="imgUrl" class="form-label">Img</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="imgUrl"
+                  th:field="*{imgUrl}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('imgUrl')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('imgUrl')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="brewery" class="form-label">Birrificio</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="brewery"
+                  th:field="*{brewery}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('brewery')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('brewery')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="style" class="form-label">Stile</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="style"
+                  th:field="*{style}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('style')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('style')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <button type="submit" class="btn btn-success w-100">
+                  Salva
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div th:replace="~{main/fragments :: scripts}"></div>
+  </body>
+</html>
