@@ -31,7 +31,7 @@ public class BeerController {
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("beer", beerService.findById(id));
+        model.addAttribute("beer", beerService.getById(id));
         return "beer/show";
     }
 
