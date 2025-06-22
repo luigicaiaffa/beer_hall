@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Beers Index</title>
+    <th:block th:replace="~{main/fragments :: styles}"></th:block>
+  </head>
+  <body>
+    <th:block th:replace="~{main/fragments :: header}"></th:block>
+
+    <div class="container">
+      <main>
+        <div class="card border-0 mb-5 mt-5">
+          <div
+            class="card-body d-flex justify-content-between flex-row align-items-center"
+          >
+            <div>
+              <h1 class="fw-bold m-0">STILI</h1>
+            </div>
+
+            <div>
+              <a th:href="@{/styles/create}" class="btn btn-sm btn-outline-dark"
+                ><i class="fa-solid fa-plus"></i> Agiungi Stile</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <section th:if="${styles.size() > 0}" class="mb-5">
+          <div
+            class="card h-100 bg-transparent border-0 d-flex flex-column gap-2 justify-content-between"
+          >
+            <div class="bg-white rounded p-2 mx-0 row">
+                <div class="text-secondary col-1">#</div>
+                <div class="text-secondary col-2">Nome</div>
+                <div class="text-secondary col-3">Fermentazione</div>
+                <div class="text-secondary col-5">Birre</div>
+                <div class="text-secondary col-1"></div>
+            </div>
+            <div class="bg-white rounded p-3 d-flex justify-content-between">
+              <span class="fw-semibold"></span>
+            </div>
+            <div class="bg-white rounded p-3 d-flex justify-content-between">
+              <span class="fw-semibold"></span>
+            </div>
+            <div class="bg-white rounded p-3 d-flex justify-content-between">
+              <span class="fw-semibold"></span>
+            </div>
+            <div class="bg-white rounded p-3 d-flex justify-content-between">
+              <span class="fw-semibold"></span>
+            </div>
+            <div class="bg-white rounded p-3 d-flex justify-content-between">
+              <span class="fw-semibold"></span>
+            </div>
+          </div>
+        </section>
+
+        <div th:unless="${styles.size() > 0}">
+          <p>Nessuno stile registrato</p>
+        </div>
+      </main>
+    </div>
+
+    <th:block th:replace="~{main/fragments :: scripts}"></th:block>
+  </body>
+</html>
