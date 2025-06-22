@@ -31,11 +31,11 @@
           <div
             class="card h-100 bg-transparent border-0 d-flex flex-column gap-2 justify-content-between"
           >
-            <div class="bg-white rounded p-2 mx-0 row">
+            <div class="bg-white rounded p-2 mx-0 row fw-bold">
               <div class="text-secondary col-1">#</div>
-              <div class="text-secondary col-3">Nome</div>
-              <div class="text-secondary col-2">Nazione</div>
-              <div class="text-secondary col-5">Birre</div>
+              <div class="text-secondary col-4">Nome</div>
+              <div class="text-secondary col-4">Nazione</div>
+              <div class="text-secondary col-2">Birre</div>
               <div class="text-secondary col-1"></div>
             </div>
             <div
@@ -44,13 +44,26 @@
               th:object="${brewery}"
             >
               <div class="fw-semibold col-1">[[*{id}]]</div>
-              <div class="fw-semibold col-3">[[*{name}]]</div>
-              <div class="fw-semibold col-2">[[*{nation}]]</div>
-              <div class="fw-semibold col-5">[[*{beers}]]</div>
+              <div class="fw-semibold col-4">[[*{name}]]</div>
+              <div class="col-4">
+                <img
+                  class="flags"
+                  th:src="@{https://flagsapi.com/{n}/flat/64.png (n = *{nation})}"
+                  alt="*{nation}"
+                />
+                <span class="badge text-secondary"> [[*{nation.name}]] </span>
+              </div>
+              <div class="fw-semibold col-2">[[*{beers.size()}]]</div>
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
-                    <a class="btn btn-sm btn-secondary" th:href="@{breweries/{id}/edit (id = ${brewery.id})}"><i class="fa-solid fa-pen"></i></a>
-                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                  <a
+                    class="btn btn-sm btn-secondary"
+                    th:href="@{breweries/{id}/edit (id = ${brewery.id})}"
+                    ><i class="fa-solid fa-pen"></i
+                  ></a>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
                 </div>
               </div>
             </div>

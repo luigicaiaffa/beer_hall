@@ -2,10 +2,14 @@ package org.project.java.beer_hall.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -21,11 +25,13 @@ public class Brewery {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private String nation;
-
     @OneToMany(mappedBy = "brewery")
     private List<Beer> beers;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "nation_id", nullable = false)
+    private Nation nation;
 
     // # Getters / Setters
 
@@ -45,11 +51,11 @@ public class Brewery {
         this.name = name;
     }
 
-    public String getNation() {
+    public Nation getNation() {
         return nation;
     }
 
-    public void setNation(String nation) {
+    public void setNation(Nation nation) {
         this.nation = nation;
     }
 
@@ -66,7 +72,7 @@ public class Brewery {
     public Brewery() {
     }
 
-    public Brewery(@NotBlank String name, @NotBlank String nation, List<Beer> beers) {
+    public Brewery(@NotBlank String name, Nation nation, List<Beer> beers) {
         this.name = name;
         this.nation = nation;
         this.beers = beers;
