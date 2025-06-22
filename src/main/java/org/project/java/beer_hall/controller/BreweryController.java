@@ -31,7 +31,7 @@ public class BreweryController {
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("brewery", breweryService.findById(id));
+        model.addAttribute("brewery", breweryService.getById(id));
         return "brewery/show";
     }
 
@@ -58,7 +58,7 @@ public class BreweryController {
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("edit", true);
-        model.addAttribute("brewery", breweryService.findById(id));
+        model.addAttribute("brewery", breweryService.getById(id));
         return "brewery/form";
     }
 

@@ -31,7 +31,7 @@ public class StyleController {
     @GetMapping("/{id}")
     public String show(@PathVariable Integer id, Model model) {
 
-        model.addAttribute("style", styleService.findById(id));
+        model.addAttribute("style", styleService.getById(id));
         return "style/show";
     }
 
@@ -58,7 +58,7 @@ public class StyleController {
     public String edit(@PathVariable Integer id, Model model) {
 
         model.addAttribute("edit", true);
-        model.addAttribute("style", styleService.findById(id));
+        model.addAttribute("style", styleService.getById(id));
         return "style/form";
     }
 
