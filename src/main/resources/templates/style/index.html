@@ -36,20 +36,21 @@
                 <div class="text-secondary col-5">Birre</div>
                 <div class="text-secondary col-1"></div>
             </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
+             <div
+              class="bg-white rounded p-3 mx-0 row"
+              th:each="style : ${styles}"
+              th:object="${style}"
+            >
+              <div class="fw-semibold col-1">[[*{id}]]</div>
+              <div class="fw-semibold col-2">[[*{name}]]</div>
+              <div class="fw-semibold col-3">[[*{fermentation}]]</div>
+              <div class="fw-semibold col-5">[[*{beers}]]</div>
+              <div class="fw-semibold col-1">
+                <div class="d-flex justify-content-end gap-2">
+                    <a class="btn btn-sm btn-secondary" th:href="@{styles/{id}/edit (id = ${style.id})}"><i class="fa-solid fa-pen"></i></a>
+                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </div>
             </div>
           </div>
         </section>

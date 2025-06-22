@@ -18,7 +18,9 @@
             </div>
 
             <div>
-              <a th:href="@{/breweries/create}" class="btn btn-sm btn-outline-dark"
+              <a
+                th:href="@{/breweries/create}"
+                class="btn btn-sm btn-outline-dark"
                 ><i class="fa-solid fa-plus"></i> Agiungi Birrificio</a
               >
             </div>
@@ -30,26 +32,27 @@
             class="card h-100 bg-transparent border-0 d-flex flex-column gap-2 justify-content-between"
           >
             <div class="bg-white rounded p-2 mx-0 row">
-                <div class="text-secondary col-1">#</div>
-                <div class="text-secondary col-2">Nome</div>
-                <div class="text-secondary col-3">Nazione</div>
-                <div class="text-secondary col-5">Birre</div>
-                <div class="text-secondary col-1"></div>
+              <div class="text-secondary col-1">#</div>
+              <div class="text-secondary col-3">Nome</div>
+              <div class="text-secondary col-2">Nazione</div>
+              <div class="text-secondary col-5">Birre</div>
+              <div class="text-secondary col-1"></div>
             </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
-            </div>
-            <div class="bg-white rounded p-3 d-flex justify-content-between">
-              <span class="fw-semibold"></span>
+            <div
+              class="bg-white rounded p-3 mx-0 row"
+              th:each="brewery : ${breweries}"
+              th:object="${brewery}"
+            >
+              <div class="fw-semibold col-1">[[*{id}]]</div>
+              <div class="fw-semibold col-3">[[*{name}]]</div>
+              <div class="fw-semibold col-2">[[*{nation}]]</div>
+              <div class="fw-semibold col-5">[[*{beers}]]</div>
+              <div class="fw-semibold col-1">
+                <div class="d-flex justify-content-end gap-2">
+                    <a class="btn btn-sm btn-secondary" th:href="@{breweries/{id}/edit (id = ${brewery.id})}"><i class="fa-solid fa-pen"></i></a>
+                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
