@@ -1,7 +1,7 @@
 :root {
   --primary-color: #ffbd4a;
   --secondary-color: #212529;
-  --bg-color: #f3f2f1;
+  --bg-color: #f1f1f1;
   --title-font: "Rubik Mono One", serif;
   --text-font: "Be Vietnam Pro", serif;
   --navbar-height: 3.5rem;
@@ -14,20 +14,18 @@ body {
   background-color: var(--bg-color);
 }
 
-.navbar {
-  background-color: var(--primary-color);
-}
-
 a {
   text-decoration: none;
   color: inherit;
 }
 
+.navbar {
+  background-color: var(--primary-color);
+}
+
 .flags {
   max-width: 1.8rem;
 }
-
-/* # Homepage */
 
 .card-header {
   background-color: var(--primary-color);
