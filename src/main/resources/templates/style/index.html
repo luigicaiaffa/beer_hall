@@ -18,7 +18,7 @@
             </div>
 
             <div>
-              <a th:href="@{/styles/create}" class="btn btn-sm btn-outline-dark"
+              <a th:href="@{/styles/create}" class="btn btn-sm btn-plus"
                 ><i class="fa-solid fa-plus"></i> Agiungi Stile</a
               >
             </div>
@@ -47,8 +47,8 @@
               <div class="fw-semibold col-2">[[*{beers.size()}]]</div>
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
-                    <a class="btn btn-sm btn-secondary" th:href="@{styles/{id}/edit (id = ${style.id})}"><i class="fa-solid fa-pen"></i></a>
-                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></button>
+                    <a class="btn btn-sm btn-outline-dark" th:href="@{styles/{id}/edit (id = ${style.id})}"><i class="fa-solid fa-pen px-2"></i></a>
+                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash px-2"></i></button>
                 </div>
               </div>
             </div>

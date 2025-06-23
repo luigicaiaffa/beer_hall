@@ -20,7 +20,7 @@
             <div>
               <a
                 th:href="@{/breweries/create}"
-                class="btn btn-sm btn-outline-dark"
+                class="btn btn-sm btn-plus"
                 ><i class="fa-solid fa-plus"></i> Agiungi Birrificio</a
               >
             </div>
@@ -31,7 +31,7 @@
           <div
             class="card h-100 bg-transparent border-0 d-flex flex-column gap-2 justify-content-between"
           >
-            <div class="bg-white rounded p-2 mx-0 row fw-bold">
+            <div class="bg-white rounded p-2 mx-0 row">
               <div class="text-secondary col-1">#</div>
               <div class="text-secondary col-4">Nome</div>
               <div class="text-secondary col-4">Nazione</div>
@@ -57,12 +57,12 @@
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
                   <a
-                    class="btn btn-sm btn-secondary"
+                    class="btn btn-sm btn-outline-dark"
                     th:href="@{breweries/{id}/edit (id = ${brewery.id})}"
-                    ><i class="fa-solid fa-pen"></i
+                    ><i class="fa-solid fa-pen px-2"></i
                   ></a>
                   <button class="btn btn-sm btn-danger">
-                    <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-trash px-2"></i>
                   </button>
                 </div>
               </div>

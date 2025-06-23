@@ -2,6 +2,7 @@ package org.project.java.beer_hall.controller;
 
 import org.project.java.beer_hall.model.Brewery;
 import org.project.java.beer_hall.service.BreweryService;
+import org.project.java.beer_hall.service.NationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,9 @@ public class BreweryController {
     @Autowired
     private BreweryService breweryService;
 
+    @Autowired
+    private NationService nationService;
+
     @GetMapping
     public String index(Model model) {
 
@@ -39,6 +43,7 @@ public class BreweryController {
     public String create(Model model) {
 
         model.addAttribute("brewery", new Brewery());
+        model.addAttribute("nations", nationService.findAll());
         return "brewery/form";
     }
 
@@ -47,6 +52,7 @@ public class BreweryController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("nations", nationService.findAll());
             return "brewery/form";
         }
 
@@ -59,6 +65,7 @@ public class BreweryController {
 
         model.addAttribute("edit", true);
         model.addAttribute("brewery", breweryService.getById(id));
+        model.addAttribute("nations", nationService.findAll());
         return "brewery/form";
     }
 
@@ -69,11 +76,12 @@ public class BreweryController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
             model.addAttribute("brewery", formBrewery);
+            model.addAttribute("nations", nationService.findAll());
             return "brewery/form";
         }
 
         breweryService.update(formBrewery);
-        return "redirect:/breweries/" + id;
+        return "redirect:/breweries";
     }
 
     @PostMapping("/{id}/delete")

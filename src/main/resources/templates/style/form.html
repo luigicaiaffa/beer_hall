@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Style Form</title>
+
+    <div th:replace="~{main/fragments :: styles}"></div>
+  </head>
+  <body>
+    <div th:replace="~{main/fragments :: header}"></div>
+
+    <div class="container">
+      <main>
+        <div class="card h-100 mt-5">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="border-bottom border-2 w-100">
+                <h1 th:if="${edit}">Modifica [[${style.name}]]</h1>
+                <h1 th:unless="${edit}">Registra Stile</h1>
+              </div>
+            </div>
+
+            <form
+              id="user-form"
+              method="POST"
+              th:action="${edit} ? @{/styles/{id}/edit (id = ${style.id})} : @{/styles/create}"
+              th:object="${style}"
+              class="row g-4 mt-2"
+            >
+              <input type="hidden" th:field="*{id}" />
+
+              <div class="col-md-6">
+                <label for="name" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  th:field="*{name}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('name')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('name')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="fermentation" class="form-label">Fermentazione</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fermentation"
+                  th:field="*{fermentation}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('fermentation')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('fermentation')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <button type="submit" class="btn btn-success w-100">
+                  Salva
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div th:replace="~{main/fragments :: scripts}"></div>
+  </body>
+</html>

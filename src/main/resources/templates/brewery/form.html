@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Brewery Form</title>
+
+    <div th:replace="~{main/fragments :: styles}"></div>
+  </head>
+  <body>
+    <div th:replace="~{main/fragments :: header}"></div>
+
+    <div class="container">
+      <main>
+        <div class="card h-100 mt-5">
+          <div class="card-body p-5">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="border-bottom border-2 w-100">
+                <h1 th:if="${edit}">Modifica [[${brewery.name}]]</h1>
+                <h1 th:unless="${edit}">Registra Birrificio</h1>
+              </div>
+            </div>
+
+            <form
+              id="user-form"
+              method="POST"
+              th:action="${edit} ? @{/breweries/{id}/edit (id = ${brewery.id})} : @{/breweries/create}"
+              th:object="${brewery}"
+              class="row g-4 mt-2"
+            >
+              <input type="hidden" th:field="*{id}" />
+
+              <div class="col-md-6">
+                <label for="name" class="form-label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  th:field="*{name}"
+                  th:errorClass="is-invalid"
+                />
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('name')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('name')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="nation" class="form-label">Nazione</label>
+                <select class="form-select" th:value="*{nation}" name="nation">
+                  <option selected></option>
+                  <option th:each="n : ${nations}" th:value="${n.id}">
+                    [[${n.name}]]
+                  </option>
+                </select>
+                <div
+                  class="invalid-feedback"
+                  th:if="${#fields.hasErrors('nation')}"
+                >
+                  <ul>
+                    <li
+                      th:each="error : ${#fields.errors('nation')}"
+                      th:text="${error}"
+                    ></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-5">
+                <button type="submit" class="btn btn-success w-100">
+                  Salva
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div th:replace="~{main/fragments :: scripts}"></div>
+  </body>
+</html>

@@ -23,6 +23,17 @@ a {
   background-color: var(--primary-color);
 }
 
+.btn-plus {
+  background-color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.btn-plus:hover {
+  background-color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  scale: 1.10;
+}
+
 .flags {
   max-width: 1.8rem;
 }

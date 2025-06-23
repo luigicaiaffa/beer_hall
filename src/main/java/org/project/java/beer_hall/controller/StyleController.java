@@ -73,7 +73,7 @@ public class StyleController {
         }
 
         styleService.update(formStyle);
-        return "redirect:/styles/" + id;
+        return "redirect:/styles";
     }
 
     @PostMapping("/{id}/delete")

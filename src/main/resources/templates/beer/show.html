@@ -20,7 +20,7 @@
             <div>
               <a
                 th:href="@{/beers/{id}/edit (id = ${beer.id})}"
-                class="btn btn-sm btn-dark"
+                class="btn btn-sm btn-outline-dark"
                 ><i class="fa-solid fa-pencil px-2"></i
               ></a>
               <button class="btn btn-sm btn-danger">
@@ -60,7 +60,11 @@
                   class="bg-white rounded p-3 d-flex justify-content-between"
                 >
                   <span class="text-secondary">Nazione</span>
-                  <span class="fw-semibold">[[${beer.brewery.nation}]]</span>
+                  <img
+                    class="flags"
+                    th:src="@{https://flagsapi.com/{n}/flat/64.png (n = ${beer.brewery.nation})}"
+                    alt="${beer.brewery.nation}"
+                  />
                 </div>
                 <div
                   class="bg-white rounded p-3 d-flex justify-content-between"
