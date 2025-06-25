@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -30,7 +31,13 @@ public class BeerController {
     private StyleService styleService;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(required = false) String name,
+            @RequestParam(required = false) String nation, @RequestParam(required = false) String style,
+            @RequestParam(required = false) String brewery) {
+
+        if (name != null || nation != null || style != null || brewery != null) {
+
+        }
 
         model.addAttribute("beers", beerService.findAll());
         return "beer/index";

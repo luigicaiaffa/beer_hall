@@ -38,6 +38,14 @@ a {
   max-width: 1.8rem;
 }
 
+.card-border {
+  box-shadow: 0px 2px 10px var(--primary-color);
+}
+
 .card-header {
+  background-color: var(--primary-color);
+}
+
+.list-header {
   background-color: var(--primary-color);
 }
