@@ -3,6 +3,7 @@ package org.project.java.beer_hall.controller;
 import org.project.java.beer_hall.model.Beer;
 import org.project.java.beer_hall.service.BeerService;
 import org.project.java.beer_hall.service.BreweryService;
+import org.project.java.beer_hall.service.NationService;
 import org.project.java.beer_hall.service.StyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,16 +31,25 @@ public class BeerController {
     @Autowired
     private StyleService styleService;
 
+    @Autowired
+    private NationService nationService;
+
     @GetMapping
     public String index(Model model, @RequestParam(required = false) String name,
             @RequestParam(required = false) String nation, @RequestParam(required = false) String style,
             @RequestParam(required = false) String brewery) {
 
-        if (name != null || nation != null || style != null || brewery != null) {
-
+        if (name != null && !name.isEmpty() && nation != null && style != null && brewery != null) {
+            model.addAttribute("beers", beerService.findAllByAllParams(name, nation, style, brewery));
+        } else if (name != null && !name.isEmpty()) {
+            model.addAttribute("beers", beerService.findByName(name));
+        } else {
+            model.addAttribute("beers", beerService.findAll());
         }
 
-        model.addAttribute("beers", beerService.findAll());
+        model.addAttribute("nations", nationService.findAll());
+        model.addAttribute("styles", styleService.findAll());
+        model.addAttribute("breweries", breweryService.findAll());
         return "beer/index";
     }
 

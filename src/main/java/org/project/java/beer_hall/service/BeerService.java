@@ -34,6 +34,16 @@ public class BeerService {
         return beer.get();
     }
 
+    public List<Beer> findByName(String name) {
+        return beerRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    public List<Beer> findAllByAllParams(String name, String nation, String style, String brewery) {
+        return beerRepository
+                .findByNameContainingIgnoreCaseAndBreweryNationNameContainingIgnoreCaseAndStyleNameContainingIgnoreCaseAndBreweryNameContainingIgnoreCase(
+                        name, nation, style, brewery);
+    }
+
     public Beer create(Beer beer) {
         return beerRepository.save(beer);
     }

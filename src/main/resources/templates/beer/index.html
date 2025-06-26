@@ -18,11 +18,68 @@
             </div>
 
             <div>
-              <a th:href="@{/beers/create}" class="btn btn-sm btn-outline-success"
+              <a
+                th:href="@{/beers/create}"
+                class="btn btn-sm btn-outline-success"
                 ><i class="fa-solid fa-plus"></i> Aggiungi Birra</a
               >
             </div>
           </div>
+
+          <form th:action="@{/beers}" method="GET" class="mb-3">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                th:value="${name}"
+                name="name"
+                placeholder="Cerca per nome"
+                class="w-50 form-control"
+              />
+
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                th:value="${nation}"
+                name="year"
+              >
+                <option selected th:value="0"></option>
+                <option th:each="n : ${nations}" th:value="${n.name}">
+                  [[${n.name}]]
+                </option>
+              </select>
+
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                th:value="${style}"
+                name="year"
+              >
+                <option selected th:value="0"></option>
+                <option th:each="s : ${styles}" th:value="${s.name}">
+                  [[${s.name}]]
+                </option>
+              </select>
+
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                th:value="${brewery}"
+                name="year"
+              >
+                <option selected th:value="0"></option>
+                <option th:each="b : ${breweries}" th:value="${b.name}">
+                  [[${b.name}]]
+                </option>
+              </select>
+
+              <button type="submit" class="btn btn-sm btn-success">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <a class="btn btn-sm btn-outline-success" th:href="@{/courses}">
+                <i class="fa-solid fa-rotate-left"></i>
+              </a>
+            </div>
+          </form>
         </div>
 
         <section th:if="${beers.size() != 0}" class="mb-5">
