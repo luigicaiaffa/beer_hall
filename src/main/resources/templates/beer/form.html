@@ -114,10 +114,10 @@
                 <select
                   th:if="${breweries}"
                   class="form-select"
-                  th:value="${brewery}"
+                  th:field="*{brewery}"
                   name="brewery"
                 >
-                  <option selected></option>
+                  <option th:value="0"></option>
                   <option th:each="brew : ${breweries}" th:value="${brew.id}">
                     [[${brew.name}]]
                   </option>
@@ -148,10 +148,10 @@
                 <select
                   th:if="${styles}"
                   class="form-select"
-                  th:value="${style}"
+                  th:field="*{style}"
                   name="style"
                 >
-                  <option selected></option>
+                  <option th:value="0"></option>
                   <option th:each="sty : ${styles}" th:value="${sty.id}">
                     [[${sty.name}]]
                   </option>

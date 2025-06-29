@@ -116,7 +116,7 @@ public class BeerController {
 
     @PostMapping("/{id}/edit")
     public String update(@PathVariable Integer id, @Valid @ModelAttribute("beer") Beer formBeer,
-            BindingResult bindingResult, Model model) {
+            BindingResult bindingResult, @RequestParam("imgFile") MultipartFile imgFile, Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("edit", true);
@@ -126,6 +126,30 @@ public class BeerController {
             return "beer/form";
         }
 
+        Beer existingBeer = beerService.getById(id);
+
+        if (imgFile != null && !imgFile.isEmpty()) {
+            try {
+                String fileName = System.currentTimeMillis() + "_" + imgFile.getOriginalFilename();
+                String uploadDir = System.getProperty("user.dir") + "/uploads/img/beers/";
+                Path uploadPath = Paths.get(uploadDir);
+
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                Path filePath = uploadPath.resolve(fileName);
+                imgFile.transferTo(filePath.toFile());
+                formBeer.setImgUrl("/img/beers/" + fileName);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        } else {
+            formBeer.setImgUrl(existingBeer.getImgUrl());
+        }
+
+        formBeer.setId(id);
         beerService.update(formBeer);
         return "redirect:/beers/" + id;
     }
