@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.project.java.beer_hall.model.Beer;
 import org.project.java.beer_hall.model.Brewery;
 import org.project.java.beer_hall.repository.BreweryRepository;
+import org.project.java.beer_hall.specification.BrewerySpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,10 @@ public class BreweryService {
 
     public List<Brewery> findAll() {
         return breweryRepository.findAll();
+    }
+
+    public List<Brewery> findAllByParams(String name, String nation) {
+        return breweryRepository.findAll(BrewerySpecification.filter(name, nation));
     }
 
     public Optional<Brewery> findById(Integer id) {

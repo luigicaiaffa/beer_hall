@@ -21,6 +21,10 @@ public class BeerService {
         return beerRepository.findAll();
     }
 
+    public List<Beer> findAllByParams(String name, String nation, String style, String brewery) {
+        return beerRepository.findAll(BeerSpecification.filter(name, nation, style, brewery));
+    }
+
     public Optional<Beer> findById(Integer id) {
         return beerRepository.findById(id);
     }
@@ -33,10 +37,6 @@ public class BeerService {
         }
 
         return beer.get();
-    }
-
-    public List<Beer> findAllByParams(String name, String nation, String style, String brewery) {
-        return beerRepository.findAll(BeerSpecification.filter(name, nation, style, brewery));
     }
 
     public Beer create(Beer beer) {
