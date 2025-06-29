@@ -22,6 +22,7 @@
             <form
               id="user-form"
               method="POST"
+              enctype="multipart/form-data"
               th:action="${edit} ? @{/beers/{id}/edit (id = ${beer.id})} : @{/beers/create}"
               th:object="${beer}"
               class="row g-4 mt-2"
@@ -77,6 +78,7 @@
                   >Gradazione alcolica</label
                 >
                 <input
+                  step="0.1"
                   type="number"
                   class="form-control"
                   id="alcoholDegrees"
@@ -97,25 +99,14 @@
               </div>
 
               <div class="col-md-12">
-                <label for="imgUrl" class="form-label">Img</label>
+                <label for="imgFile" class="form-label">Immagine</label>
                 <input
-                  type="text"
+                  type="file"
                   class="form-control"
-                  id="imgUrl"
-                  th:field="*{imgUrl}"
-                  th:errorClass="is-invalid"
+                  id="imgFile"
+                  name="imgFile"
+                  accept="image/*"
                 />
-                <div
-                  class="invalid-feedback"
-                  th:if="${#fields.hasErrors('imgUrl')}"
-                >
-                  <ul>
-                    <li
-                      th:each="error : ${#fields.errors('imgUrl')}"
-                      th:text="${error}"
-                    ></li>
-                  </ul>
-                </div>
               </div>
 
               <div class="col-md-6">

@@ -28,7 +28,12 @@
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
           <a class="navbar-brand" th:href="@{/}"
-            ><img th:src="@{/img/logo/bar-seeklogo.png}" alt="Logo" width="60" height="40"></a>
+            ><img
+              th:src="@{/img/logo/bar-seeklogo.png}"
+              alt="Logo"
+              width="60"
+              height="40"
+          /></a>
           <button
             class="navbar-toggler"
             type="button"
@@ -59,6 +64,172 @@
         </div>
       </nav>
     </header>
+
+    <!-- # Delete Modals -->
+    <div th:fragment="deleteBeerModal">
+      <button
+        type="button"
+        class="btn btn-sm btn-danger px-3"
+        data-bs-toggle="modal"
+        th:data-bs-target="'#deleteBeerModal' + ${beer.id}"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+
+      <div
+        class="modal fade"
+        th:id="'deleteBeerModal' + ${beer.id}"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                Elimina Birra
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-center">
+              Sei sicuro di voler rimuovere la birra
+              <span class="fw-semibold">"[[${beer.name}]]"</span> ?
+              <br />
+              Questa azione non è reversibile.
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Annulla
+              </button>
+              <form th:action="@{/beers/{id}/delete(id = ${beer.id})}" method="POST">
+                <button type="submit" class="btn btn-sm btn-danger">
+                  Elimina
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:fragment="deleteStyleModal">
+      <button
+        type="button"
+        class="btn btn-sm btn-danger px-3"
+        data-bs-toggle="modal"
+        th:data-bs-target="'#deleteStyleModal' + *{id}"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+
+      <div
+        class="modal fade"
+        th:id="'deleteStyleModal' + *{id}"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                Elimina Stile
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-center">
+              Sei sicuro di voler rimuovere lo stile
+              <span class="fw-semibold">"[[*{name}]]"</span> ?
+              <br />
+              Questa azione non è reversibile.
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Annulla
+              </button>
+              <form th:action="@{/styles/{id}/delete(id = *{id})}" method="POST">
+                <button type="submit" class="btn btn-sm btn-danger">
+                  Elimina
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div th:fragment="deleteBreweryModal">
+      <button
+        type="button"
+        class="btn btn-sm btn-danger px-3"
+        data-bs-toggle="modal"
+        th:data-bs-target="'#deleteBreweryModal' + *{id}"
+      >
+        <i class="fa-solid fa-trash"></i>
+      </button>
+
+      <div
+        class="modal fade"
+        th:id="'deleteBreweryModal' + *{id}"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fw-bold fs-5" id="exampleModalLabel">
+                Elimina Birrificio
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body text-center">
+              Sei sicuro di voler rimuovere il birrificio
+              <span class="fw-semibold">"[[*{name}]]"</span> ?
+              <br />
+              Questa azione non è reversibile.
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary"
+                data-bs-dismiss="modal"
+              >
+                Annulla
+              </button>
+              <form th:action="@{/breweries/{id}/delete(id = *{id})}" method="POST">
+                <button type="submit" class="btn btn-sm btn-danger">
+                  Elimina
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- # Scripts -->
     <th:block th:fragment="scripts">

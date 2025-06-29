@@ -1,5 +1,9 @@
 package org.project.java.beer_hall.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.project.java.beer_hall.model.Beer;
 import org.project.java.beer_hall.service.BeerService;
 import org.project.java.beer_hall.service.BreweryService;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.Valid;
 
@@ -67,12 +72,32 @@ public class BeerController {
     }
 
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult, Model model) {
+    public String store(@Valid @ModelAttribute("beer") Beer formBeer, BindingResult bindingResult,
+            @RequestParam("imgFile") MultipartFile imgFile, Model model) {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("breweries", breweryService.findAll());
             model.addAttribute("styles", styleService.findAll());
             return "beer/form";
+        }
+
+        if (imgFile != null && !imgFile.isEmpty()) {
+            try {
+                String fileName = System.currentTimeMillis() + "_" + imgFile.getOriginalFilename();
+                String uploadDir = System.getProperty("user.dir") + "/uploads/img/beers/";
+                Path uploadPath = Paths.get(uploadDir);
+
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                Path filePath = uploadPath.resolve(fileName);
+                imgFile.transferTo(filePath.toFile());
+                formBeer.setImgUrl("/img/beers/" + fileName);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
         }
 
         beerService.create(formBeer);
