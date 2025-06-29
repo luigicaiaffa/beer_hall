@@ -52,8 +52,8 @@
 
               <div class="col-md-6">
                 <label for="nation" class="form-label">Nazione</label>
-                <select class="form-select" th:value="*{nation}" name="nation">
-                  <option selected></option>
+                <select class="form-select" th:field="*{nation}" name="nation">
+                  <option th:value="0"></option>
                   <option th:each="n : ${nations}" th:value="${n.id}">
                     [[${n.name}]]
                   </option>
