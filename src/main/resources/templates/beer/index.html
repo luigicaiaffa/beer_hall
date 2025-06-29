@@ -40,7 +40,7 @@
                 class="form-select"
                 aria-label="Default select example"
                 th:value="${nation}"
-                name="year"
+                name="nation"
               >
                 <option selected th:value="0"></option>
                 <option th:each="n : ${nations}" th:value="${n.name}">
@@ -52,7 +52,7 @@
                 class="form-select"
                 aria-label="Default select example"
                 th:value="${style}"
-                name="year"
+                name="style"
               >
                 <option selected th:value="0"></option>
                 <option th:each="s : ${styles}" th:value="${s.name}">
@@ -64,7 +64,7 @@
                 class="form-select"
                 aria-label="Default select example"
                 th:value="${brewery}"
-                name="year"
+                name="brewery"
               >
                 <option selected th:value="0"></option>
                 <option th:each="b : ${breweries}" th:value="${b.name}">

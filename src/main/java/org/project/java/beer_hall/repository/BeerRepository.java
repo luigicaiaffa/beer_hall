@@ -4,15 +4,9 @@ import java.util.List;
 
 import org.project.java.beer_hall.model.Beer;
 import org.springframework.data.jpa.repository.JpaRepository;
-public interface BeerRepository extends JpaRepository<Beer, Integer> {
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-    public List<Beer> findByNameContainingIgnoreCase(String beerName);
-
-    public List<Beer> findByBreweryNationName(String nationName);
-
-    public List<Beer> findByStyleName(String styleName);
-
-    public List<Beer> findByBreweryName(String breweryName);
+public interface BeerRepository extends JpaRepository<Beer, Integer>, JpaSpecificationExecutor<Beer> {
 
     public List<Beer> findByNameContainingIgnoreCaseAndBreweryNationNameContainingIgnoreCaseAndStyleNameContainingIgnoreCaseAndBreweryNameContainingIgnoreCase(
             String name, String nation, String style, String brewery);

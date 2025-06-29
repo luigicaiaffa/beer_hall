@@ -39,14 +39,11 @@ public class BeerController {
             @RequestParam(required = false) String nation, @RequestParam(required = false) String style,
             @RequestParam(required = false) String brewery) {
 
-        if (name != null && !name.isEmpty() && nation != null && style != null && brewery != null) {
-            model.addAttribute("beers", beerService.findAllByAllParams(name, nation, style, brewery));
-        } else if (name != null && !name.isEmpty()) {
-            model.addAttribute("beers", beerService.findByName(name));
-        } else {
-            model.addAttribute("beers", beerService.findAll());
-        }
+        nation = (nation != null && nation.equals("0")) ? "" : nation;
+        style = (style != null && style.equals("0")) ? "" : style;
+        brewery = (brewery != null && brewery.equals("0")) ? "" : brewery;
 
+        model.addAttribute("beers", beerService.findAllByParams(name, nation, style, brewery));
         model.addAttribute("nations", nationService.findAll());
         model.addAttribute("styles", styleService.findAll());
         model.addAttribute("breweries", breweryService.findAll());
