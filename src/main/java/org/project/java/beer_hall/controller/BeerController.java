@@ -131,7 +131,7 @@ public class BeerController {
         if (imgFile != null && !imgFile.isEmpty()) {
             try {
                 String fileName = System.currentTimeMillis() + "_" + imgFile.getOriginalFilename();
-                String uploadDir = System.getProperty("user.dir") + "/uploads/img/beers/";
+                String uploadDir = "./uploads/img/beers/";
                 Path uploadPath = Paths.get(uploadDir);
 
                 if (!Files.exists(uploadPath)) {
