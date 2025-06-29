@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.validation.Valid;
 
@@ -22,9 +23,14 @@ public class StyleController {
     private StyleService styleService;
 
     @GetMapping
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(required = false) String name) {
 
-        model.addAttribute("styles", styleService.findAll());
+        if (name != null && !name.isEmpty()) {
+            model.addAttribute("styles", styleService.findByName(name));
+        } else {
+            model.addAttribute("styles", styleService.findAll());
+        }
+
         return "style/index";
     }
 

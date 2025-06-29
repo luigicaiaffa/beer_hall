@@ -21,6 +21,10 @@ public class StyleService {
         return styleRepository.findAll();
     }
 
+    public List<Style> findByName(String name) {
+        return styleRepository.findByNameContainingIgnoreCase(name);
+    }
+
     public Optional<Style> findById(Integer id) {
         return styleRepository.findById(id);
     }
