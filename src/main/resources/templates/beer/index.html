@@ -10,76 +10,78 @@
     <div class="container">
       <main>
         <div class="card border-0 mb-5 mt-5 card-border">
-          <div
-            class="card-body d-flex justify-content-between flex-row align-items-center"
-          >
-            <div>
-              <h1 class="fw-bold m-0">BIRRE</h1>
+          <div class="card-body">
+            <div
+              class="d-flex justify-content-between flex-row align-items-center mb-4"
+            >
+              <div>
+                <h1 class="fw-bold m-0">BIRRE</h1>
+              </div>
+
+              <div>
+                <a
+                  th:href="@{/beers/create}"
+                  class="btn btn-sm btn-success"
+                  ><i class="fa-solid fa-plus"></i> Aggiungi Birra</a
+                >
+              </div>
             </div>
 
-            <div>
-              <a
-                th:href="@{/beers/create}"
-                class="btn btn-sm btn-outline-success"
-                ><i class="fa-solid fa-plus"></i> Aggiungi Birra</a
-              >
-            </div>
+            <form th:action="@{/beers}" method="GET" class="mb-3">
+              <div class="input-group input-group-sm">
+                <input
+                  type="text"
+                  th:value="${name}"
+                  name="name"
+                  placeholder="Cerca per nome"
+                  class="w-25 form-control"
+                />
+
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  th:value="${nation}"
+                  name="nation"
+                >
+                  <option selected th:value="0">Cerca per nazione</option>
+                  <option th:each="n : ${nations}" th:value="${n.name}">
+                    [[${n.name}]]
+                  </option>
+                </select>
+
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  th:value="${style}"
+                  name="style"
+                >
+                  <option selected th:value="0">Cerca per stile</option>
+                  <option th:each="s : ${styles}" th:value="${s.name}">
+                    [[${s.name}]]
+                  </option>
+                </select>
+
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  th:value="${brewery}"
+                  name="brewery"
+                >
+                  <option selected th:value="0">Cerca per birrificio</option>
+                  <option th:each="b : ${breweries}" th:value="${b.name}">
+                    [[${b.name}]]
+                  </option>
+                </select>
+
+                <button type="submit" class="btn btn-sm btn-warning">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <a class="btn btn-sm btn-outline-warning text-dark" th:href="@{/beers}">
+                  <i class="fa-solid fa-rotate-left"></i>
+                </a>
+              </div>
+            </form>
           </div>
-
-          <form th:action="@{/beers}" method="GET" class="mb-3">
-            <div class="input-group input-group-sm">
-              <input
-                type="text"
-                th:value="${name}"
-                name="name"
-                placeholder="Cerca per nome"
-                class="w-50 form-control"
-              />
-
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                th:value="${nation}"
-                name="nation"
-              >
-                <option selected th:value="0"></option>
-                <option th:each="n : ${nations}" th:value="${n.name}">
-                  [[${n.name}]]
-                </option>
-              </select>
-
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                th:value="${style}"
-                name="style"
-              >
-                <option selected th:value="0"></option>
-                <option th:each="s : ${styles}" th:value="${s.name}">
-                  [[${s.name}]]
-                </option>
-              </select>
-
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                th:value="${brewery}"
-                name="brewery"
-              >
-                <option selected th:value="0"></option>
-                <option th:each="b : ${breweries}" th:value="${b.name}">
-                  [[${b.name}]]
-                </option>
-              </select>
-
-              <button type="submit" class="btn btn-sm btn-success">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-              <a class="btn btn-sm btn-outline-success" th:href="@{/courses}">
-                <i class="fa-solid fa-rotate-left"></i>
-              </a>
-            </div>
-          </form>
         </div>
 
         <section th:if="${beers.size() != 0}" class="mb-5">

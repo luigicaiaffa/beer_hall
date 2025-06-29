@@ -20,7 +20,7 @@
             <div>
               <a
                 th:href="@{/breweries/create}"
-                class="btn btn-sm btn-outline-success"
+                class="btn btn-sm btn-success"
                 ><i class="fa-solid fa-plus"></i> Agiungi Birrificio</a
               >
             </div>
@@ -53,7 +53,14 @@
                 />
                 <span class="badge text-secondary"> [[*{nation.name}]] </span>
               </div>
-              <div class="fw-semibold col-2">[[*{beers.size()}]]</div>
+              <div class="col-2">
+                <a
+                  class="btn btn-sm btn-outline-warning px-3 fw-bold text-dark"
+                  th:href="@{/beers(brewery=*{name})}"
+                >
+                  [[*{beers.size()}]]
+                </a>
+              </div>
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
                   <a

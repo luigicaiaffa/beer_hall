@@ -18,7 +18,9 @@
             </div>
 
             <div>
-              <a th:href="@{/styles/create}" class="btn btn-sm btn-outline-success"
+              <a
+                th:href="@{/styles/create}"
+                class="btn btn-sm btn-success"
                 ><i class="fa-solid fa-plus"></i> Agiungi Stile</a
               >
             </div>
@@ -30,13 +32,13 @@
             class="card h-100 bg-transparent border-0 d-flex flex-column gap-2 justify-content-between"
           >
             <div class="rounded-pill p-2 mx-0 row list-header card-border">
-                <div class="text-secondary col-1">#</div>
-                <div class="text-secondary col-4">Nome</div>
-                <div class="text-secondary col-4">Fermentazione</div>
-                <div class="text-secondary col-2">Birre</div>
-                <div class="text-secondary col-1"></div>
+              <div class="text-secondary col-1">#</div>
+              <div class="text-secondary col-4">Nome</div>
+              <div class="text-secondary col-4">Fermentazione</div>
+              <div class="text-secondary col-2">Birre</div>
+              <div class="text-secondary col-1"></div>
             </div>
-             <div
+            <div
               class="bg-white rounded-pill p-2 mx-0 row card-border my-2"
               th:each="style : ${styles}"
               th:object="${style}"
@@ -44,11 +46,23 @@
               <div class="fw-semibold col-1">[[*{id}]]</div>
               <div class="fw-semibold col-4">[[*{name}]]</div>
               <div class="fw-semibold col-4">[[*{fermentation}]]</div>
-              <div class="fw-semibold col-2">[[*{beers.size()}]]</div>
+              <div class="col-2">
+                <a
+                  class="btn btn-sm btn-outline-warning px-3 fw-bold text-dark"
+                  th:href="@{/beers(style=*{name})}"
+                  >[[*{beers.size()}]]</a
+                >
+              </div>
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
-                    <a class="btn btn-sm btn-outline-dark" th:href="@{styles/{id}/edit (id = ${style.id})}"><i class="fa-solid fa-pen px-2"></i></a>
-                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash px-2"></i></button>
+                  <a
+                    class="btn btn-sm btn-outline-dark"
+                    th:href="@{styles/{id}/edit (id = ${style.id})}"
+                    ><i class="fa-solid fa-pen px-2"></i
+                  ></a>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fa-solid fa-trash px-2"></i>
+                  </button>
                 </div>
               </div>
             </div>
