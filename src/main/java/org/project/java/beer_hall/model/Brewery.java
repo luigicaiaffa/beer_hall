@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "breweries")
@@ -28,6 +29,7 @@ public class Brewery {
     @OneToMany(mappedBy = "brewery")
     private List<Beer> beers;
 
+    @NotNull
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "nation_id", nullable = false)
@@ -72,7 +74,7 @@ public class Brewery {
     public Brewery() {
     }
 
-    public Brewery(@NotBlank String name, Nation nation, List<Beer> beers) {
+    public Brewery(@NotBlank String name, @NotNull Nation nation, List<Beer> beers) {
         this.name = name;
         this.nation = nation;
         this.beers = beers;

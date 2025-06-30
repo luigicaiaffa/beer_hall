@@ -62,10 +62,10 @@
             </div>
             <div
               class="bg-white rounded-pill p-2 mx-0 row card-border my-2"
-              th:each="style : ${styles}"
+              th:each="style, idx : ${styles}"
               th:object="${style}"
             >
-              <div class="fw-semibold col-1">[[*{id}]]</div>
+              <div class="fw-semibold col-1">[[${idx.index + 1}]]</div>
               <div class="fw-semibold col-4">[[*{name}]]</div>
               <div class="fw-semibold col-4">[[*{fermentation}]]</div>
               <div class="col-2">
@@ -78,13 +78,11 @@
               <div class="fw-semibold col-1">
                 <div class="d-flex justify-content-end gap-2">
                   <a
-                    class="btn btn-sm btn-outline-dark px-3" 
+                    class="btn btn-sm btn-outline-dark px-3"
                     th:href="@{styles/{id}/edit (id = ${style.id})}"
                     ><i class="fa-solid fa-pencil"></i
                   ></a>
-                   <div
-                      th:replace="~{main/fragments :: deleteStyleModal}"
-                    ></div>
+                  <div th:replace="~{main/fragments :: deleteStyleModal}"></div>
                 </div>
               </div>
             </div>

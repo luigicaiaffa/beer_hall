@@ -74,10 +74,10 @@
             </div>
             <div
               class="bg-white rounded-pill p-2 mx-0 row card-border my-2"
-              th:each="brewery : ${breweries}"
+              th:each="brewery, idx : ${breweries}"
               th:object="${brewery}"
             >
-              <div class="fw-semibold col-1">[[*{id}]]</div>
+              <div class="fw-semibold col-1">[[${idx.index + 1}]]</div>
               <div class="fw-semibold col-4">[[*{name}]]</div>
               <div class="col-4">
                 <img

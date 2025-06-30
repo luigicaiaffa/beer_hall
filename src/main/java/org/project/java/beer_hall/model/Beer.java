@@ -9,11 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "beers")
@@ -26,14 +25,12 @@ public class Beer {
     @NotBlank
     private String name;
 
-    @Min(1)
     @NotNull
     @Positive
-    private Integer size;
+    private Double size;
 
     @NotNull
-    @Positive
-    @DecimalMin(value = "0.1")
+    @PositiveOrZero
     private Double alcoholDegrees;
 
     private String imgUrl;
@@ -66,11 +63,11 @@ public class Beer {
         this.name = name;
     }
 
-    public Integer getSize() {
+    public Double getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Double size) {
         this.size = size;
     }
 
@@ -111,8 +108,8 @@ public class Beer {
     public Beer() {
     }
 
-    public Beer(@NotBlank String name, @Min(1) @NotNull @Positive Integer size,
-            @NotNull @Positive @DecimalMin("0.1") Double alcoholDegrees, String imgUrl, Brewery brewery, Style style) {
+    public Beer(@NotBlank String name, @NotNull @Positive Double size,
+            @NotNull @Positive Double alcoholDegrees, String imgUrl, Brewery brewery, Style style) {
         this.name = name;
         this.size = size;
         this.alcoholDegrees = alcoholDegrees;
